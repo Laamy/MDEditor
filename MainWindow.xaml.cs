@@ -11,6 +11,8 @@ namespace MDEditor
         {
             InitializeComponent();
 
+            this.Title += $" | {Config.Version}";
+
             // some sample markdown
             {
                 var content = ResourceFetcher.GetResource("MDEditor.Content.ExampleMarkdown.md");
