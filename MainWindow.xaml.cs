@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Documents;
 
 using Markdig;
@@ -37,6 +38,26 @@ namespace MDEditor
             string styledContent = content.Replace("{HTMLContent}", htmlContent);
 
             MarkdownDisplay.NavigateToString(styledContent);
+        }
+
+        private void Projects_Click(object sender, RoutedEventArgs e)
+        {
+            MDProjects projects = new MDProjects(this);
+            projects.Show();
+
+            IsEnabled = false;
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            Application.Current.Shutdown();
+
+            base.OnClosed(e);
         }
     }
 }

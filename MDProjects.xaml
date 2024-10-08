@@ -1,0 +1,56 @@
+﻿<Window x:Class="MDEditor.MDProjects"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MDLoader"
+        SizeToContent="WidthAndHeight"
+        Background="#181818"
+        WindowStartupLocation="CenterScreen"
+        Icon="pack://application:,,,/MDEditor;component/Content/Assets/markdown_logo.ico">
+    <Grid>
+        <StackPanel>
+            <TextBlock Text="Select an action:"
+                       FontWeight="Bold"
+                       Foreground="White"
+                       Margin="7,9,0,0"/>
+
+            <StackPanel x:Name="MainPanel"
+                        Background="#202020" Margin="0,10,0,0">
+                <Border x:Name="NewProjectBorder" Background="#202020" BorderBrush="Gray" BorderThickness="1" 
+                        MouseDown="NewProjectBorder_MouseDown"
+                        MouseEnter="NewProjectBorder_MouseEnter" MouseLeave="NewProjectBorder_MouseLeave">
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Image Source="pack://application:,,,/MDEditor;component/Content/Assets/new_project.png"
+                               Width="75" Height="75"
+                               Stretch="Uniform"/>
+                        <StackPanel Margin="10,0,0,0">
+                            <TextBlock Text="New Project"
+                                       FontWeight="Bold"
+                                       Foreground="White"/>
+                            <TextBlock Text="Start a brand new markdown project"
+                                       Foreground="White"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+
+                <Border x:Name="LoadProjectBorder" Background="#202020" BorderBrush="Gray" BorderThickness="1" 
+                        Margin="0,5,0,0"
+                        MouseDown="LoadProjectBorder_MouseDown"
+                        MouseEnter="LoadProjectBorder_MouseEnter" MouseLeave="LoadProjectBorder_MouseLeave">
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Image Source="pack://application:,,,/MDEditor;component/Content/Assets/load_project.png"
+                               Width="75" Height="75"
+                               Stretch="Uniform"/>
+                        <StackPanel Margin="10,0,0,0">
+                            <TextBlock Text="Load Project"
+                                       FontWeight="Bold"
+                                       Foreground="White"/>
+                            <TextBlock Text="Load an existing markdown project"
+                                       Foreground="White"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
