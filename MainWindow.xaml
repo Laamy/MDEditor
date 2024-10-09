@@ -4,27 +4,110 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MDEditor"
-        mc:Ignorable="d"
-        Title="Markdown Editor" Height="450" Width="800">
+        mc:Ignorable="d" WindowStyle="None" AllowsTransparency="False"
+        Title="Markdown Editor" Height="600" Width="1000"
+        Background="#21252B" Foreground="#ABB2BF" FontFamily="Segoe UI"
+        MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="0" CaptionHeight="0"/>
+    </WindowChrome.WindowChrome>
 
-    <DockPanel>
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="File" >
-                <MenuItem Header="Projects..." Click="Projects_Click"/>
+    <DockPanel Background="#282C34">
+        <Border Background="#21252B" Height="30" DockPanel.Dock="Top" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Markdown Editor" VerticalAlignment="Center" 
+                           Margin="10,0" Foreground="#E5C07B" FontWeight="Bold"/>
+
+                <Button Grid.Column="1" Content="—" Width="30" 
+                        Background="Transparent" Foreground="#E5C07B" 
+                        BorderThickness="0" x:Name="MinimizeBtn" Click="MinimizeBtn_Click"/>
+                <Button Grid.Column="2" Content="□" Width="30" 
+                        Background="Transparent" Foreground="#E5C07B" 
+                        BorderThickness="0" x:Name="MaximizeBtn" Click="MaximizeBtn_Click"/>
+                <Button Grid.Column="3" Content="X" Width="30" 
+                        Background="Transparent" Foreground="#E5C07B" 
+                        BorderThickness="0" x:Name="CloseBtn" Click="CloseBtn_Click"/>
+            </Grid>
+        </Border>
+
+        <Menu DockPanel.Dock="Top" Background="#21252B" Foreground="#E5C07B">
+            <Menu.Resources>
+                <Style TargetType="MenuItem">
+                    <Setter Property="Foreground" Value="#E5C07B"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Padding" Value="10,5"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Margin" Value="0"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#3E4451"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#98C379"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+
+                <Style TargetType="MenuItem" x:Key="ChildMenuItemStyle">
+                    <Setter Property="Foreground" Value="#E5C07B"/>
+                    <Setter Property="Background" Value="#21252B"/>
+                    <Setter Property="Padding" Value="10,5"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Margin" Value="0"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#3E4451"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#98C379"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Menu.Resources>
+
+            <MenuItem Header="File">
+                <MenuItem Header="Projects..." Click="Projects_Click" 
+                          Style="{StaticResource ChildMenuItemStyle}"/>
                 <Separator/>
-                <MenuItem Header="Exit" Click="Exit_Click"/>
+                <MenuItem Header="Exit" Click="Exit_Click" 
+                          Style="{StaticResource ChildMenuItemStyle}"/>
             </MenuItem>
         </Menu>
 
-        <Grid>
+        <Grid Margin="10">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
-            <RichTextBox FontFamily="Consolas" x:Name="TextEditor" Grid.Column="0" TextChanged="TextEditor_TextChanged"/>
-            <WebBrowser x:Name="MarkdownDisplay" Grid.Column="1"/>
-            <GridSplitter Width="5" />
+
+            <Border Grid.Column="0" BorderThickness="1" BorderBrush="#3E4451" CornerRadius="5">
+                <RichTextBox x:Name="TextEditor" FontSize="14" 
+                             Background="#1E2127" Foreground="#ABB2BF" 
+                             FontFamily="Consolas" Padding="10" 
+                             VerticalScrollBarVisibility="Auto" 
+                             TextChanged="TextEditor_TextChanged" />
+            </Border>
+
+            <GridSplitter Grid.Column="1" Width="6" HorizontalAlignment="Center" 
+                          VerticalAlignment="Stretch" Background="#3E4451" 
+                          ResizeBehavior="PreviousAndNext" />
+
+            <WebBrowser Grid.Column="2" x:Name="MarkdownDisplay" Margin="0"/>
         </Grid>
     </DockPanel>
 </Window>

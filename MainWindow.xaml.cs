@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Documents;
-
+using System.Windows.Input;
 using Markdig;
 
 namespace MDEditor
 {
     public partial class MainWindow : Window
     {
+        private bool _isResizing;
+        private Point _startPoint;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -21,6 +24,12 @@ namespace MDEditor
 
                 TextEditor.Document = new FlowDocument(sampleText);
             }
+        }
+
+        private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ButtonState == MouseButtonState.Pressed)
+                this.DragMove();
         }
 
         private void TextEditor_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
@@ -53,11 +62,22 @@ namespace MDEditor
             Application.Current.Shutdown();
         }
 
-        protected override void OnClosed(EventArgs e)
+        private void CloseBtn_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            this.Close();
+        }
 
-            base.OnClosed(e);
+        private void MaximizeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.WindowState == WindowState.Normal)
+                this.WindowState = WindowState.Maximized;
+            else
+                this.WindowState = WindowState.Normal;
+        }
+
+        private void MinimizeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
         }
     }
 }

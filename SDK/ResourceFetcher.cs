@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Reflection;
+using System.Windows;
 
 class ResourceFetcher
 {
